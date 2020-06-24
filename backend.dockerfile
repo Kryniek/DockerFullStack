@@ -1,5 +1,6 @@
 FROM maven:3.6.3-openjdk-11
-COPY ./Backend /usr/src/Backend
 WORKDIR /usr/src/Backend
+COPY ./Backend .
 EXPOSE 8080
+RUN mvn clean install -DskipTests=true
 ENTRYPOINT ["mvn", "spring-boot:run"]

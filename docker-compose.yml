@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  database:
+    container_name: database
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    ports:
+      - 9997:3306
+    volumes:
+      - databaseVolume:/var/lib/mysql
+    networks:
+      - backend
+  backend:
+    container_name: backend
+    build:
+      dockerfile: backend.dockerfile
+      context: .
+    restart: always
+    environment:
+      - DB_HOST=database
+    ports:
+      - 9999:8080
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - database
+  frontend:
+    container_name: frontend
+    build:
+      dockerfile: frontend.dockerfile
+      context: .
+    restart: always
+    ports:
+      - 9998:4200
+    networks:
+      - frontend
+    depends_on:
+      - backend
+
+volumes:
+  databaseVolume:
+
+networks:
+  backend:
+  frontend:
