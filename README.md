@@ -1,7 +1,7 @@
 # DockerFullStack
 Docker Compose = DB + Backend + Frontend
 
-#Usage
+# Usage
 
 Just run `docker-compose up -d`. All services will build and run in detached mode (in background).
 
