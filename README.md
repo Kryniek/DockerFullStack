@@ -1,6 +1,21 @@
 # DockerFullStack
 Docker Compose = DB + Backend + Frontend
 
+#Usage
+
+Just run `docker-compose up -d`. All services will build and run in detached mode (in background).
+
+MySQL database service can be connected by:
+- Host: `127.0.0.1`
+- Port: `9997`
+- Username: `root`
+- Password: `root`
+- Default schema (optional): `mydb`
+
+Spring boot backend service expose only one endpoint to retrieve users. Can be reached by: `http://localhost:9999/api/users`.
+
+Angular frontend service can be accessed by: `http://localhost:9998/`.
+
 # Docker commands --help (in polish)
 - Uruchamianie nowego kontenera
 
@@ -138,3 +153,11 @@ ENTRYPOINT ["ng", "serve", "--host", "0.0.0.0"]
 3.Uruchomienie kontenera:
 
 `docker run --name frontend --rm -p 9998:4200 kryniek/frontend:latest`
+
+- Usuwanie wszystkich zastopowanych kontenerów
+
+`docker container prune`
+
+- Usuwanie wszystkich obrazów "śmieci"
+
+`docker rmi $(docker images -f "dangling=true" -q)`
