@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://REST_API_HOST:8080",
+    "secure": false
+  }
+}

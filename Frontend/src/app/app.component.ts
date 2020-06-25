@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "./user.model";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-root',
@@ -9,14 +10,15 @@ import {User} from "./user.model";
 export class AppComponent implements OnInit {
     public users: User[];
 
+    constructor(private http: HttpClient) {
+    }
+
     ngOnInit(): void {
         this.setUsers();
     }
 
     private setUsers(): void {
-        this.users = [
-            new User(1, "Name1", "Surname1"),
-            new User(2, "Name2", "Surname2"),
-            new User(3, "Name3", "Surname3")];
+        this.http.get<User[]>('/api/users')
+            .subscribe(users => this.users = users);
     }
 }

@@ -35,6 +35,8 @@ services:
       dockerfile: frontend.dockerfile
       context: .
     restart: always
+    environment:
+      - REST_API_HOST=backend
     ports:
       - 9998:4200
     networks:
